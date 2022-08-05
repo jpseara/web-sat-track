@@ -1,0 +1,376 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<title>WebSatTrack</title>
+		<style>
+			html,
+			body {
+				padding: 0;
+				margin: 0;
+			}
+			
+			#earth_div {
+				z-index: 1;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				background-image: url("./data/images/space.png");
+				position: absolute !important;
+			}
+			
+			#current_time {
+				z-index: 2;
+				font-family: "Lucida Console";
+				position: absolute;
+				color: white;
+				font-weight: bold;
+				font-size: 14px;
+				bottom: 25px;
+				right: 10px;
+			}
+			
+			#commands1 {
+				z-index: 2;
+				font-family: "Lucida Console";
+				position: absolute;
+				color: white;
+				font-size: 10px;
+				bottom: 13px;
+				right: 10px
+			}
+			
+			#commands2 {
+				z-index: 2;
+				font-family: "Lucida Console";
+				position: absolute;
+				color: white;
+				font-size: 10px;
+				bottom: 0px;
+				right: 10px
+			}
+			
+			#satellite_title {
+				z-index: 2;
+				font-family: "Tahoma";
+				position: absolute;
+				color: white;
+				font-size: 13px;
+				font-weight: bold;
+				right: 10px;
+				top: 0px;
+			}
+			
+			#satellite_list {
+				z-index: 2;
+				font-family: "Tahoma";
+				position: absolute;
+				width: 150px;
+				right: 10px;
+				top: 30px;
+			}
+			
+			#serial_port_title {
+				z-index: 2;
+				font-family: "Tahoma";
+				position: absolute;
+				color: white;
+				font-size: 13px;
+				font-weight: bold;
+				right: 10px;
+				top: 50px;
+			}
+			
+			#serial_port_list {
+				z-index: 2;
+				font-family: "Tahoma";
+				position: absolute;
+				width: 100px;
+				right: 10px;
+				top: 80px;
+			}
+			
+			#tle_file_title {
+				z-index: 2;
+				font-family: "Tahoma";
+				position: absolute;
+				color: white;
+				font-size: 13px;
+				font-weight: bold;
+				left: 10px;
+				top: 0px;
+			}
+			
+			#tle_file_input {
+				z-index: 2;
+				font-family: "Tahoma";
+				position: absolute;
+				color: white;
+				left: 10px;
+				top: 30px;
+			}
+			
+			#table_satellite {
+				z-index: 2;
+				font-family: "Lucida Console";
+				position: absolute;
+				color: white;
+				background-color: rgba(0, 0, 0, 0.5);
+				vertical-allign: middle;
+				left: 10px;
+				top: 75px;
+			}
+			
+			.table_sat_title {
+				font-size: 12px;
+				font-weight: bold;
+			}
+			
+			.table_sat_header {
+				font-size: 11px;
+				font-weight: bold;
+			}
+			
+			.table_sat_data {
+				font-size: 11px;
+				font-weight: normal;
+			}
+			
+			#table_base {
+				z-index: 2;
+				font-family: "Lucida Console";
+				position: absolute;
+				color: white;
+				background-color: rgba(0, 0, 0, 0.5);
+				vertical-allign: middle;
+				left: 10px;
+				bottom: 80px;
+			}
+			
+			.table_base_title {
+				font-size: 12px;
+				font-weight: bold;
+			}
+			
+			.table_base_header {
+				font-size: 11px;
+				font-weight: bold;
+			}
+			
+			#table_sun {
+				z-index: 2;
+				font-family: "Lucida Console";
+				position: absolute;
+				color: white;
+				background-color: rgba(0, 0, 0, 0.5);
+				vertical-allign: middle;
+				right: 10px;
+				top: 125px;
+			}
+			
+			.table_sun_title {
+				font-size: 12px;
+				font-weight: bold;
+			}
+			
+			.table_sun_header {
+				font-size: 11px;
+				font-weight: bold;
+			}
+			
+			.table_sun_data {
+				font-size: 11px;
+				font-weight: normal;
+			}
+			
+			.table_base_data {
+				font-size: 11px;
+				font-weight: normal;
+			}
+			
+			#table_moon {
+				z-index: 2;
+				font-family: "Lucida Console";
+				position: absolute;
+				color: white;
+				background-color: rgba(0, 0, 0, 0.5);
+				vertical-allign: middle;
+				right: 10px;
+				bottom: 80px;
+			}
+			
+			.table_moon_title {
+				font-size: 12px;
+				font-weight: bold;
+			}
+			
+			.table_moon_header {
+				font-size: 11px;
+				font-weight: bold;
+			}
+			
+			.table_moon_data {
+				font-size: 11px;
+				font-weight: normal;
+			}
+		</style>
+		<link rel="shortcut icon" type="image/png" href="./data/images/favicon.png" />
+	</head>
+
+	<body>
+		<div id="earth_div"></div>
+		<div id="info_div">
+			<p id="current_time"></p>
+			<p id="commands1">Drag and drop the blue polygon to change current location</p>
+			<p id="commands2">Alt+Shift+F to toggle satellite auto-focusing | Alt+Shift+S to enter fullscreen mode</p>
+			<p id="satellite_title">Satellite</p>
+			<select id="satellite_list" size="1" disabled="true"></select>
+			<p id="serial_port_title">Tracking</p>
+			<select id="serial_port_list" size="1" disabled="true"></select>
+			<p id="tle_file_title">TLE File</p>
+			<input type="file" name="file" id="tle_file_input" disabled="true"></input>
+			<table id="table_satellite" border="1">
+				<tr>
+					<th class="table_sat_title" colspan="2">SATELLITE</th>
+				</tr>
+				<tr>
+					<td class="table_sat_header">Name</td>
+					<td id="table_sat_name" class="table_sat_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_sat_header">Latitude (&deg;)</td>
+					<td id="table_sat_latitude" class="table_sat_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_sat_header">Longitude (&deg;)</td>
+					<td id="table_sat_longitude" class="table_sat_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_sat_header">Azimuth (&deg;)</td>
+					<td id="table_sat_azimuth" class="table_sat_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_sat_header">Elevation (&deg;)</td>
+					<td id="table_sat_elevation" class="table_sat_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_sat_header">Range (Km)</td>
+					<td id="table_sat_range" class="table_sat_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_sat_header">Altitude (Km)</td>
+					<td id="table_sat_altitude" class="table_sat_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_sat_header">Footprint (Km)</td>
+					<td id="table_sat_footprint" class="table_sat_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_sat_header">Velocity (Km/s)</td>
+					<td id="table_sat_velocity" class="table_sat_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_sat_header">Doppler Factor</td>
+					<td id="table_sat_doppler" class="table_sat_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_sat_header">Transit Start</td>
+					<td id="table_sat_transit_start" class="table_sat_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_sat_header">Transit End</td>
+					<td id="table_sat_transit_end" class="table_sat_data">-</td>
+				</tr>
+			</table>
+			<table id="table_base" border="1">
+				<tr>
+					<th class="table_base_title" colspan="2">BASE STATION</th>
+				</tr>
+				<tr>
+					<td class="table_base_header">Latitude (&deg;)</td>
+					<td id="table_base_latitude" class="table_base_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_base_header">Longitude (&deg;)</td>
+					<td id="table_base_longitude" class="table_base_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_base_header">Height (Km)</td>
+					<td id="table_base_height" class="table_base_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_base_header">Sunlit</td>
+					<td id="table_base_sunlight" class="table_base_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_base_header">On Sat. Footprint</td>
+					<td id="table_base_on_footprint" class="table_base_data">-</td>
+				</tr>
+			</table>
+			<table id="table_sun" border="1">
+				<tr>
+					<th class="table_sun_title" colspan="2">SUN</th>
+				</tr>
+				<tr>
+					<td class="table_sun_header">Latitude (&deg;)</td>
+					<td id="table_sun_latitude" class="table_sun_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_sun_header">Longitude (&deg;)</td>
+					<td id="table_sun_longitude" class="table_sun_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_sun_header">Azimuth (&deg;)</td>
+					<td id="table_sun_azimuth" class="table_sun_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_sun_header">Elevation (&deg;)</td>
+					<td id="table_sun_elevation" class="table_sun_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_sun_header">Distance (Km)</td>
+					<td id="table_sun_distance" class="table_sun_data">-</td>
+				</tr>
+			</table>
+			<table id="table_moon" border="1">
+				<tr>
+					<th class="table_moon_title" colspan="2">MOON</th>
+				</tr>
+				<tr>
+					<td class="table_moon_header">Latitude (&deg;)</td>
+					<td id="table_moon_latitude" class="table_moon_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_moon_header">Longitude (&deg;)</td>
+					<td id="table_moon_longitude" class="table_moon_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_moon_header">Azimuth (&deg;)</td>
+					<td id="table_moon_azimuth" class="table_moon_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_moon_header">Elevation (&deg;)</td>
+					<td id="table_moon_elevation" class="table_moon_data">-</td>
+				</tr>
+				<tr>
+					<td class="table_moon_header">Distance (Km)</td>
+					<td id="table_moon_distance" class="table_moon_data">-</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+	<script src="./webglearth2/v2/api-offline.js"></script>
+	<script src="./lib/webgl-utils.js"></script>
+	<script src="./lib/webgl-debug.js"></script>
+	<script src="./lib/moment.js"></script>
+	<script src="./lib/satellite.js"></script>
+	<script src="./lib/jspredict.js"></script>
+	<script src="./web-sat-track.js"></script>
+	<script src="./web-sat-track-utils.js"></script>
+	<script src="./web-sat-track-satellite.js"></script>
+	<script src="./web-sat-track-sun.js"></script>
+	<script src="./web-sat-track-moon.js"></script>
+	<script src="./web-sat-track-serial.js"></script>
+
+</html>

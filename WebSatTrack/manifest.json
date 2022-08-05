@@ -1,0 +1,29 @@
+{
+	"name": "WebSatTrack",
+	"description": "A satellite tracker and antenna controller.",
+	"version": "1.0",
+	"manifest_version": 2,
+	"app": {
+		"background": {
+			"scripts": ["background.js"]
+		}
+	},
+	"permissions": ["serial", "fullscreen"],
+	"icons": {
+		"128": "data/images/appicon.png"
+	},
+	"commands": {
+		"focus": {
+			"suggested_key": {
+				"default": "Alt+Shift+F"
+			},
+			"description": "Focus on the satellite"
+		},
+		"fullscreen": {
+			"suggested_key": {
+				"default": "Alt+Shift+S"
+			},
+			"description": "Fullscreen mode"
+		}
+	}
+}
