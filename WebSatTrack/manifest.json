@@ -1,7 +1,7 @@
 {
 	"name": "WebSatTrack",
 	"description": "A satellite tracker and antenna controller.",
-	"version": "1.0",
+	"version": "1.1",
 	"manifest_version": 2,
 	"app": {
 		"background": {

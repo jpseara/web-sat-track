@@ -501,7 +501,15 @@ document.getElementById('tle_file_input').onchange = function() {
 			satellitesHTML.disabled = false;
 
 		removeSatellite();
-		satellitesHTML.selectedIndex = "0";
+		
+		if (!bad_format) { // Show first satellite of the list if the TLE file is good
+			satellitesHTML.selectedIndex = "1";
+			sat_name = sat_tle_file_all_lines[0];
+			sat_tle_line_1 = sat_tle_file_all_lines[1];
+			sat_tle_line_2 = sat_tle_file_all_lines[2];
+			initializeNewSatellite();
+		} else
+			satellitesHTML.selectedIndex = "0";
 
 		getSerialPorts(); // Refresh serial ports
 
@@ -521,7 +529,7 @@ document.getElementById("satellite_list").onchange = function() {
 	removeSatellite();
 
 	if (index != 0) { // Any option but "None"
-		sat_name = sat_tle_file_all_lines[(index * 3) - 3]; // The '-3' is necessary to ignore the first field of the select list ("none")
+		sat_name = sat_tle_file_all_lines[(index * 3) - 3]; // The '-3' is necessary because the TLE file has one less entry than the application (it doesn't have "None")
 		sat_tle_line_1 = sat_tle_file_all_lines[(index * 3 + 1) - 3];
 		sat_tle_line_2 = sat_tle_file_all_lines[(index * 3 + 2) - 3];
 		initializeNewSatellite();
