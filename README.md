@@ -16,7 +16,7 @@ How to load in Chrome:
 5. Open chrome://apps
 6. Click on the WebSatTrack application
 
-Another option is just to drag the .crx file and drop it into the chrome://extensions screen
+Another option is just to drag the .crx file and drop it into the chrome://extensions screen.
 
 __
 
