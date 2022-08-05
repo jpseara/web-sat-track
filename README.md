@@ -1,7 +1,9 @@
 # web-sat-track
 **ISCTE Web Sat Track**
 
-A Google Chrome App - A Satellite Tracker and Antenna Controller
+*A Google Chrome App: Satellite Tracker and Antenna Controller*
+
+Project originally from 2016, developed at ISCTE - Instituto Universitário de Lisboa, Portugal, under the supervision of professor [Francisco Cercas](mailto:fabc@iscte-iul.pt)
 
 Demo: https://www.youtube.com/watch?v=hR9Ac9vjQwk
 
@@ -12,7 +14,7 @@ Version history:
 
 __
 
-How to load in Chrome:
+**How to load in Chrome:**
 
 1. Open chrome://extensions
 2. Enable "Developer mode"
@@ -25,7 +27,7 @@ Another option is just to drag the .crx file and drop it into the chrome://exten
 
 __
 
-How to compile the .crx file (Chrome Extension File):
+**How to compile the .crx file (Chrome Extension File):**
 
 Windows:
 `"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --pack-extension=.\WebSatTrack`
