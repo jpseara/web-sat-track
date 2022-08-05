@@ -7,8 +7,8 @@ Demo: https://www.youtube.com/watch?v=hR9Ac9vjQwk
 
 Version history:
 
-1.0 - Original version (July 2016)
-1.1 - Improvements (Aug 2022)
+- 1.0 - Original version (July 2016)
+- 1.1 - Improvements (Aug 2022)
 
 __
 
